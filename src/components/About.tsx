@@ -1,4 +1,5 @@
 import Reveal from './Reveal'
+import CountUp from './CountUp'
 import { profile, getYearsOfExperience } from '../data/content'
 
 export default function About() {
@@ -21,7 +22,9 @@ export default function About() {
           </p>
 
           <div className="mt-8 inline-flex items-center gap-2 border border-border bg-surface px-4 py-2 font-mono text-xs text-text-muted">
-            <span className="text-ice">{yearsExperience}+</span>
+            <span className="text-ice">
+              <CountUp to={yearsExperience} suffix="+" />
+            </span>
             <span>YEARS IN ITSM/LMS INTEGRATION</span>
           </div>
         </Reveal>

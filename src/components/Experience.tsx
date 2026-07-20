@@ -16,7 +16,7 @@ export default function Experience() {
 
         <div className="flex flex-col gap-6">
           {experience.map((entry, i) => (
-            <Reveal key={entry.id} delayMs={i * 80}>
+            <Reveal key={entry.id} delayMs={i * 80} frame>
               <article className="border border-border bg-surface p-6 transition-colors hover:border-border-hover md:p-8">
                 <div className="mb-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
                   <div>

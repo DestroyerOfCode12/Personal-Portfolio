@@ -45,11 +45,16 @@ export default {
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         scan: 'scan 6s linear infinite',
+        'digit-in': 'digit-in 200ms ease-out',
       },
       keyframes: {
         scan: {
           '0%': { transform: 'translateY(-100%)' },
           '100%': { transform: 'translateY(100%)' },
+        },
+        'digit-in': {
+          '0%': { transform: 'translateY(-2px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
         },
       },
     },
