@@ -6,6 +6,8 @@ export interface ExperienceEntry {
   company: string
   role: string
   period: string
+  /** ISO date (YYYY-MM-DD) this role started — used to compute total years of experience. */
+  startDate: string
   current: boolean
   highlights: string[]
 }
@@ -53,6 +55,7 @@ export const experience: ExperienceEntry[] = [
     company: 'Pink Elephant',
     role: 'ServiceNow Software Engineer/Developer',
     period: 'Feb 2026 — Present',
+    startDate: '2026-02-01',
     current: true,
     highlights: [
       'Deliver ITSM/LMS integration projects end to end, from scoping through go-live.',
@@ -65,6 +68,7 @@ export const experience: ExperienceEntry[] = [
     company: 'Adaptive',
     role: 'Technical Consultant',
     period: '2023 — 2026',
+    startDate: '2023-01-01',
     current: false,
     highlights: [
       'Consulted on ServiceNow, Cherwell, and HaloITSM implementations for enterprise clients.',
@@ -122,6 +126,16 @@ export const projects: ProjectEntry[] = [
     url: 'https://github.com/DestroyerOfCode12/cv-vault',
   },
 ]
+
+export function getYearsOfExperience(): number {
+  const earliestStart = experience.reduce<Date>((earliest, entry) => {
+    const start = new Date(entry.startDate)
+    return start < earliest ? start : earliest
+  }, new Date(experience[0].startDate))
+
+  const years = (Date.now() - earliestStart.getTime()) / (1000 * 60 * 60 * 24 * 365.25)
+  return Math.floor(years)
+}
 
 export const skills: SkillGroup[] = [
   {

@@ -18,18 +18,24 @@ interface RateLimitBucket {
 }
 
 async function isRateLimited(ip: string): Promise<boolean> {
-  const store = getStore('contact-rate-limits')
-  const now = Date.now()
-  const bucket = await store.get(ip, { type: 'json' })
+  try {
+    const store = getStore('contact-rate-limits')
+    const now = Date.now()
+    const bucket = await store.get(ip, { type: 'json' })
 
-  if (!bucket || now > (bucket as RateLimitBucket).resetAt) {
-    await store.setJSON(ip, { count: 1, resetAt: now + WINDOW_MS })
+    if (!bucket || now > (bucket as RateLimitBucket).resetAt) {
+      await store.setJSON(ip, { count: 1, resetAt: now + WINDOW_MS })
+      return false
+    }
+
+    const nextCount = (bucket as RateLimitBucket).count + 1
+    await store.setJSON(ip, { count: nextCount, resetAt: (bucket as RateLimitBucket).resetAt })
+    return nextCount > MAX_REQUESTS
+  } catch (err) {
+    // Fail open: a Blobs outage shouldn't take down the contact form, only its rate limiting.
+    console.error('Rate limit check failed, allowing request:', err)
     return false
   }
-
-  const nextCount = (bucket as RateLimitBucket).count + 1
-  await store.setJSON(ip, { count: nextCount, resetAt: (bucket as RateLimitBucket).resetAt })
-  return nextCount > MAX_REQUESTS
 }
 
 let transporter: nodemailer.Transporter | null = null

@@ -60,6 +60,12 @@ export default function StatusBar({ compact = false }: { compact?: boolean }) {
           <span className="hidden sm:inline">
             SESSION <span className="text-text">{formatUptime(uptimeSeconds)}</span>
           </span>
+          <span className="hidden lg:inline">
+            BUILD <span className="text-text">{__COMMIT_SHA__}</span>
+            {__BUILD_CONTEXT__ !== 'production' && (
+              <span className="text-amber"> ({__BUILD_CONTEXT__})</span>
+            )}
+          </span>
         </div>
       </div>
     </div>
