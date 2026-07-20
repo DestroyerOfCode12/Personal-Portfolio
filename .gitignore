@@ -23,5 +23,8 @@ npm-debug.log*
 # claude code local settings (machine-specific permissions)
 .claude/settings.local.json
 
+# netlify
+.netlify
+
 # os
 .DS_Store
