@@ -1,10 +1,13 @@
 import { profile } from '../data/content'
+import GitHubActivity from './GitHubActivity'
 
 export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
     <footer className="bg-surface">
+      <GitHubActivity />
+
       <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-10 font-mono text-xs text-text-muted md:flex-row md:items-center md:justify-between">
         <p>
           © {year} {profile.name} — {profile.location}

@@ -1,7 +1,9 @@
 import Reveal from './Reveal'
-import { profile } from '../data/content'
+import { profile, getYearsOfExperience } from '../data/content'
 
 export default function About() {
+  const yearsExperience = getYearsOfExperience()
+
   return (
     <section id="about" className="border-b border-border">
       <div className="mx-auto max-w-6xl px-6 py-20">
@@ -17,6 +19,11 @@ export default function About() {
             organizations running, and building full-stack applications when the problem calls
             for custom software rather than platform configuration.
           </p>
+
+          <div className="mt-8 inline-flex items-center gap-2 border border-border bg-surface px-4 py-2 font-mono text-xs text-text-muted">
+            <span className="text-ice">{yearsExperience}+</span>
+            <span>YEARS IN ITSM/LMS INTEGRATION</span>
+          </div>
         </Reveal>
       </div>
     </section>

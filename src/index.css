@@ -3,12 +3,49 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-bg: 10 14 20;
+    --color-surface: 17 23 34;
+    --color-surface-raised: 22 29 42;
+    --color-border: 31 41 55;
+    --color-border-hover: 42 54 68;
+    --color-ice: 63 220 255;
+    --color-ice-dim: 27 75 87;
+    --color-ice-soft: 127 232 255;
+    --color-amber: 255 180 84;
+    --color-amber-dim: 92 67 38;
+    --color-text: 230 237 243;
+    --color-text-muted: 139 152 168;
+    --color-text-faint: 90 100 114;
+  }
+
+  :root.light {
+    --color-bg: 241 244 248;
+    --color-surface: 255 255 255;
+    --color-surface-raised: 247 249 251;
+    --color-border: 214 220 227;
+    --color-border-hover: 194 202 211;
+    --color-ice: 14 124 144;
+    --color-ice-dim: 207 243 248;
+    --color-ice-soft: 23 166 191;
+    --color-amber: 181 114 14;
+    --color-amber-dim: 253 235 213;
+    --color-text: 16 21 28;
+    --color-text-muted: 75 85 99;
+    --color-text-faint: 138 148 163;
+  }
+
   html {
     scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  html.light {
+    color-scheme: light;
   }
 
   body {
-    @apply bg-bg text-text font-body antialiased;
+    @apply bg-bg text-text font-body antialiased transition-colors duration-300;
   }
 
   h1, h2, h3, h4 {

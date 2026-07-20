@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3FDCFF" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#3FDCFF" stop-opacity="0" />
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#3FDCFF" stroke-opacity="0.06" stroke-width="1" />
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0A0E14" />
+  <rect width="1200" height="630" fill="url(#grid)" />
+  <rect width="1200" height="300" fill="url(#glow)" />
+
+  <rect x="1" y="1" width="1198" height="628" fill="none" stroke="#1F2937" stroke-width="2" />
+
+  <!-- status bar echo -->
+  <circle cx="80" cy="90" r="7" fill="#3FDCFF" />
+  <text x="104" y="97" font-family="JetBrains Mono, monospace" font-size="22" letter-spacing="2" fill="#3FDCFF">AVAILABLE FOR WORK</text>
+  <text x="1120" y="97" font-family="JetBrains Mono, monospace" font-size="22" fill="#8B98A8" text-anchor="end">STATUS://LIVE</text>
+
+  <line x1="80" y1="130" x2="1120" y2="130" stroke="#1F2937" stroke-width="2" />
+
+  <!-- name -->
+  <text x="80" y="330" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="88" fill="#E6EDF3">Jacob Mkhwanazi</text>
+
+  <!-- role -->
+  <text x="80" y="390" font-family="Space Grotesk, sans-serif" font-weight="500" font-size="36" fill="#8B98A8">ServiceNow Engineer / Full-Stack Developer</text>
+
+  <!-- location + tags -->
+  <text x="80" y="440" font-family="JetBrains Mono, monospace" font-size="24" fill="#5A6472">JOHANNESBURG, SOUTH AFRICA</text>
+
+  <line x1="80" y1="500" x2="1120" y2="500" stroke="#1F2937" stroke-width="2" />
+
+  <text x="80" y="560" font-family="JetBrains Mono, monospace" font-size="22" fill="#3FDCFF">SERVICENOW</text>
+  <text x="300" y="560" font-family="JetBrains Mono, monospace" font-size="22" fill="#3FDCFF">HALOITSM</text>
+  <text x="500" y="560" font-family="JetBrains Mono, monospace" font-size="22" fill="#3FDCFF">REACT</text>
+  <text x="660" y="560" font-family="JetBrains Mono, monospace" font-size="22" fill="#3FDCFF">NODE.JS</text>
+  <text x="860" y="560" font-family="JetBrains Mono, monospace" font-size="22" fill="#3FDCFF">TYPESCRIPT</text>
+</svg>

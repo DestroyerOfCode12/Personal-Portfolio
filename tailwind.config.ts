@@ -2,30 +2,29 @@ import type { Config } from 'tailwindcss'
 
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
-  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        bg: '#0A0E14',
-        surface: '#111722',
-        'surface-raised': '#161D2A',
+        bg: 'rgb(var(--color-bg) / <alpha-value>)',
+        surface: 'rgb(var(--color-surface) / <alpha-value>)',
+        'surface-raised': 'rgb(var(--color-surface-raised) / <alpha-value>)',
         border: {
-          DEFAULT: '#1F2937',
-          hover: '#2A3644',
+          DEFAULT: 'rgb(var(--color-border) / <alpha-value>)',
+          hover: 'rgb(var(--color-border-hover) / <alpha-value>)',
         },
         ice: {
-          DEFAULT: '#3FDCFF',
-          dim: '#1B4B57',
-          soft: '#7FE8FF',
+          DEFAULT: 'rgb(var(--color-ice) / <alpha-value>)',
+          dim: 'rgb(var(--color-ice-dim) / <alpha-value>)',
+          soft: 'rgb(var(--color-ice-soft) / <alpha-value>)',
         },
         amber: {
-          DEFAULT: '#FFB454',
-          dim: '#5C4326',
+          DEFAULT: 'rgb(var(--color-amber) / <alpha-value>)',
+          dim: 'rgb(var(--color-amber-dim) / <alpha-value>)',
         },
         text: {
-          DEFAULT: '#E6EDF3',
-          muted: '#8B98A8',
-          faint: '#5A6472',
+          DEFAULT: 'rgb(var(--color-text) / <alpha-value>)',
+          muted: 'rgb(var(--color-text-muted) / <alpha-value>)',
+          faint: 'rgb(var(--color-text-faint) / <alpha-value>)',
         },
       },
       fontFamily: {
@@ -35,13 +34,13 @@ export default {
       },
       backgroundImage: {
         'grid-texture':
-          'linear-gradient(to right, rgba(63,220,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(63,220,255,0.05) 1px, transparent 1px)',
+          'linear-gradient(to right, rgb(var(--color-ice) / 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--color-ice) / 0.05) 1px, transparent 1px)',
       },
       backgroundSize: {
         grid: '40px 40px',
       },
       boxShadow: {
-        glow: '0 0 24px rgba(63,220,255,0.25)',
+        glow: '0 0 24px rgb(var(--color-ice) / 0.25)',
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
