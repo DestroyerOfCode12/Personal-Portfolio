@@ -1,8 +1,10 @@
 import { profile } from '../data/content'
 import { useReducedMotion } from '../hooks/useReducedMotion'
+import { useScrambleText } from '../hooks/useScrambleText'
 
 export default function Hero() {
   const reducedMotion = useReducedMotion()
+  const scrambledName = useScrambleText(profile.name)
 
   return (
     <section
@@ -23,8 +25,11 @@ export default function Hero() {
           STATUS://LIVE — this page runs its own telemetry, see the bar above
         </p>
 
-        <h1 className="max-w-3xl font-display text-4xl font-semibold leading-tight text-text md:text-6xl">
-          {profile.name}
+        <h1
+          aria-label={profile.name}
+          className="max-w-3xl font-display text-4xl font-semibold leading-tight text-text md:text-6xl"
+        >
+          <span aria-hidden="true">{scrambledName}</span>
         </h1>
 
         <p className="mt-4 max-w-2xl font-display text-lg text-text-muted md:text-xl">

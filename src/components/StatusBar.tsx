@@ -55,10 +55,16 @@ export default function StatusBar({ compact = false }: { compact?: boolean }) {
             DEVICE <span className="text-text">{deviceClass.toUpperCase()}</span>
           </span>
           <span>
-            JHB <span className="text-text">{formatJohannesburgTime(now)}</span>
+            JHB{' '}
+            <span key={formatJohannesburgTime(now)} className="inline-block text-text animate-digit-in">
+              {formatJohannesburgTime(now)}
+            </span>
           </span>
           <span className="hidden sm:inline">
-            SESSION <span className="text-text">{formatUptime(uptimeSeconds)}</span>
+            SESSION{' '}
+            <span key={formatUptime(uptimeSeconds)} className="inline-block text-text animate-digit-in">
+              {formatUptime(uptimeSeconds)}
+            </span>
           </span>
           <span className="hidden lg:inline">
             BUILD <span className="text-text">{__COMMIT_SHA__}</span>
