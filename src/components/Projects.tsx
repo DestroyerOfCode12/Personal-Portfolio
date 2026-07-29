@@ -25,6 +25,8 @@ function handleCardMouseMove(e: MouseEvent<HTMLElement>) {
 
 export default function Projects() {
   const reducedMotion = useReducedMotion()
+  const featuredProject = projects.find((project) => project.featured)
+  const gridProjects = projects.filter((project) => !project.featured)
 
   return (
     <section id="projects" className="border-b border-border">
@@ -38,8 +40,78 @@ export default function Projects() {
           </h2>
         </Reveal>
 
+        {featuredProject && (
+          <Reveal frame className="mb-8">
+            <article className="grid overflow-hidden border border-border bg-surface md:grid-cols-2">
+              <div className="relative aspect-video border-b border-border md:aspect-auto md:border-b-0 md:border-r">
+                <img
+                  src="/projects/malika-cakes.png"
+                  alt={`${featuredProject.name} live site screenshot`}
+                  className="h-full w-full object-cover object-top"
+                />
+                <span className="absolute left-3 top-3 border border-ice/30 bg-bg/80 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-ice backdrop-blur">
+                  FEATURED
+                </span>
+              </div>
+
+              <div className="flex flex-col p-6 md:p-8">
+                <div className="mb-2 flex items-start justify-between gap-3">
+                  <h3 className="font-display text-xl font-semibold text-text">
+                    {featuredProject.name}
+                  </h3>
+                  <span
+                    className={`shrink-0 border px-2 py-1 font-mono text-[10px] uppercase tracking-wider ${
+                      STATUS_CLASS[featuredProject.status]
+                    }`}
+                  >
+                    {STATUS_LABEL[featuredProject.status]}
+                  </span>
+                </div>
+
+                <p className="flex-1 text-sm leading-relaxed text-text-muted">
+                  {featuredProject.description}
+                </p>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {featuredProject.stack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="border border-border px-2 py-0.5 font-mono text-[10px] text-text-muted"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                  {featuredProject.liveUrl && (
+                    <a
+                      href={featuredProject.liveUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="border border-ice/40 bg-ice/10 px-4 py-2 font-mono text-xs uppercase tracking-wider text-ice transition-colors hover:bg-ice/20"
+                    >
+                      Visit site →
+                    </a>
+                  )}
+                  {featuredProject.url && (
+                    <a
+                      href={featuredProject.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="border border-border px-4 py-2 font-mono text-xs uppercase tracking-wider text-text-muted transition-colors hover:border-border-hover hover:text-text"
+                    >
+                      View repository →
+                    </a>
+                  )}
+                </div>
+              </div>
+            </article>
+          </Reveal>
+        )}
+
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {projects.map((project, i) => (
+          {gridProjects.map((project, i) => (
             <Reveal key={project.id} delayMs={i * 60} frame>
               <article
                 onMouseMove={reducedMotion ? undefined : handleCardMouseMove}

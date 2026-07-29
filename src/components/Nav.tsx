@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useTheme } from '../hooks/useTheme'
+import { useActiveSection } from '../hooks/useActiveSection'
 
 const LINKS = [
   { id: 'about', label: 'About' },
@@ -8,6 +9,8 @@ const LINKS = [
   { id: 'skills', label: 'Skills' },
   { id: 'contact', label: 'Contact' },
 ]
+
+const SECTION_IDS = LINKS.map((link) => link.id)
 
 function ThemeToggle() {
   const [theme, toggleTheme] = useTheme()
@@ -33,8 +36,40 @@ function ThemeToggle() {
   )
 }
 
+interface NavLinksProps {
+  activeId: string | null
+  onLinkClick?: () => void
+  className: string
+  id?: string
+}
+
+function NavLinks({ activeId, onLinkClick, className, id }: NavLinksProps) {
+  return (
+    <ul id={id} className={className}>
+      {LINKS.map((link) => {
+        const isActive = activeId === link.id
+        return (
+          <li key={link.id}>
+            <a
+              href={`#${link.id}`}
+              onClick={onLinkClick}
+              className={`inline-flex items-center gap-1.5 transition-colors hover:text-ice focus-visible:text-ice ${
+                isActive ? 'text-ice' : ''
+              }`}
+            >
+              {isActive && <span className="h-1 w-1 rounded-full bg-ice" aria-hidden="true" />}
+              {link.label}
+            </a>
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
+
 export default function Nav() {
   const [open, setOpen] = useState(false)
+  const activeId = useActiveSection(SECTION_IDS)
 
   return (
     <nav className="sticky top-0 z-40 border-b border-border bg-bg/90 backdrop-blur">
@@ -57,39 +92,21 @@ export default function Nav() {
         </div>
 
         <div className="hidden items-center gap-8 md:flex">
-          <ul className="flex items-center gap-8 font-mono text-xs uppercase tracking-wider text-text-muted">
-            {LINKS.map((link) => (
-              <li key={link.id}>
-                <a
-                  href={`#${link.id}`}
-                  className="transition-colors hover:text-ice focus-visible:text-ice"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <NavLinks
+            activeId={activeId}
+            className="flex items-center gap-8 font-mono text-xs uppercase tracking-wider text-text-muted"
+          />
           <ThemeToggle />
         </div>
       </div>
 
       {open && (
-        <ul
+        <NavLinks
           id="mobile-nav"
+          activeId={activeId}
+          onLinkClick={() => setOpen(false)}
           className="flex flex-col gap-4 border-t border-border bg-bg px-6 py-4 font-mono text-xs uppercase tracking-wider text-text-muted md:hidden"
-        >
-          {LINKS.map((link) => (
-            <li key={link.id}>
-              <a
-                href={`#${link.id}`}
-                onClick={() => setOpen(false)}
-                className="block transition-colors hover:text-ice focus-visible:text-ice"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+        />
       )}
     </nav>
   )
