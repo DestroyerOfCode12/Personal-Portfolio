@@ -20,6 +20,9 @@ export interface ProjectEntry {
   status: 'live' | 'in-progress' | 'complete'
   context?: string
   url?: string
+  liveUrl?: string
+  /** Marks the single project shown in the larger spotlight block above the grid. */
+  featured?: boolean
 }
 
 export interface SkillGroup {
@@ -115,6 +118,8 @@ export const projects: ProjectEntry[] = [
     stack: ['React', 'Vite', 'TypeScript', 'Tailwind', 'Zustand', 'Node.js', 'Express', 'Prisma'],
     status: 'live',
     url: 'https://github.com/DestroyerOfCode12/malika-cakes',
+    liveUrl: 'https://malikas-cakes.netlify.app/',
+    featured: true,
   },
   {
     id: 'resume-engine',
