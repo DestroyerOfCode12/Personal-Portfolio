@@ -1,61 +1,29 @@
 import type { Config } from 'tailwindcss'
 
+const c = (name: string) => `rgb(var(--color-${name}) / <alpha-value>)`
+
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        bg: 'rgb(var(--color-bg) / <alpha-value>)',
-        surface: 'rgb(var(--color-surface) / <alpha-value>)',
-        'surface-raised': 'rgb(var(--color-surface-raised) / <alpha-value>)',
-        border: {
-          DEFAULT: 'rgb(var(--color-border) / <alpha-value>)',
-          hover: 'rgb(var(--color-border-hover) / <alpha-value>)',
-        },
-        ice: {
-          DEFAULT: 'rgb(var(--color-ice) / <alpha-value>)',
-          dim: 'rgb(var(--color-ice-dim) / <alpha-value>)',
-          soft: 'rgb(var(--color-ice-soft) / <alpha-value>)',
-        },
-        amber: {
-          DEFAULT: 'rgb(var(--color-amber) / <alpha-value>)',
-          dim: 'rgb(var(--color-amber-dim) / <alpha-value>)',
-        },
-        text: {
-          DEFAULT: 'rgb(var(--color-text) / <alpha-value>)',
-          muted: 'rgb(var(--color-text-muted) / <alpha-value>)',
-          faint: 'rgb(var(--color-text-faint) / <alpha-value>)',
-        },
+        bg: c('bg'),
+        surface: c('surface'),
+        ink: c('ink'),
+        'ink-text': c('ink-text'),
+        border: { DEFAULT: c('border'), hover: c('border-hover') },
+        ice: { DEFAULT: c('ice'), dim: c('ice-dim') },
+        amber: c('amber'),
+        text: { DEFAULT: c('text'), muted: c('text-muted'), faint: c('text-faint') },
       },
       fontFamily: {
         display: ['"Space Grotesk"', 'sans-serif'],
         body: ['"IBM Plex Sans"', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },
-      backgroundImage: {
-        'grid-texture':
-          'linear-gradient(to right, rgb(var(--color-ice) / 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--color-ice) / 0.05) 1px, transparent 1px)',
-      },
-      backgroundSize: {
-        grid: '40px 40px',
-      },
-      boxShadow: {
-        glow: '0 0 24px rgb(var(--color-ice) / 0.25)',
-      },
-      animation: {
-        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        scan: 'scan 6s linear infinite',
-        'digit-in': 'digit-in 200ms ease-out',
-      },
-      keyframes: {
-        scan: {
-          '0%': { transform: 'translateY(-100%)' },
-          '100%': { transform: 'translateY(100%)' },
-        },
-        'digit-in': {
-          '0%': { transform: 'translateY(-2px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
+      fontSize: {
+        hero: ['clamp(2.75rem, 8.2vw, 8rem)', { lineHeight: '0.95', letterSpacing: '-0.035em' }],
+        display: ['clamp(2rem, 5vw, 4.25rem)', { lineHeight: '1', letterSpacing: '-0.03em' }],
       },
     },
   },

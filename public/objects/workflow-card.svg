@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" width="480" height="300">
+  <rect x="0.5" y="0.5" width="479" height="299" fill="#0A0E14" stroke="#2A3644"/>
+  <rect x="0.5" y="0.5" width="479" height="36" fill="#111722" stroke="#2A3644"/>
+  <circle cx="22" cy="18" r="4" fill="#3FDCFF"/>
+  <text x="38" y="22" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.5" fill="#8B98A8">FLOW://ENROLLMENT_SYNC</text>
+  <text x="458" y="22" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="10" fill="#3FDCFF">ACTIVE</text>
+  <g stroke="#3FDCFF" stroke-opacity="0.55" stroke-width="1.5" fill="none">
+    <path d="M118 120 H178"/><path d="M302 120 H362"/>
+    <path d="M240 150 V196"/>
+  </g>
+  <g font-family="JetBrains Mono, monospace" font-size="11" fill="#E6EDF3">
+    <rect x="30" y="92" width="88" height="56" fill="#111722" stroke="#2A3644"/><text x="74" y="124" text-anchor="middle">PAYFAST</text>
+    <rect x="178" y="92" width="124" height="56" fill="#0A0E14" stroke="#3FDCFF"/><text x="240" y="116" text-anchor="middle" fill="#3FDCFF">INTEGRATION</text><text x="240" y="132" text-anchor="middle" fill="#8B98A8" font-size="9">Node.js</text>
+    <rect x="362" y="92" width="88" height="56" fill="#111722" stroke="#2A3644"/><text x="406" y="124" text-anchor="middle">LITMOS</text>
+    <rect x="190" y="196" width="100" height="44" fill="#111722" stroke="#2A3644"/><text x="240" y="223" text-anchor="middle">HALOITSM</text>
+  </g>
+  <text x="30" y="276" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A6472">payment event → enrol → ticket</text>
+</svg>

@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg: 10 14 20;
+    --color-surface: 17 23 34;
+    --color-ink: 63 220 255;
+    --color-ink-text: 10 14 20;
+    --color-border: 31 41 55;
+    --color-border-hover: 42 54 68;
+    --color-ice: 63 220 255;
+    --color-ice-dim: 27 75 87;
+    --color-amber: 255 180 84;
+    --color-text: 230 237 243;
+    --color-text-muted: 139 152 168;
+    --color-text-faint: 90 100 114;
+  }
+
+  :root.light {
+    --color-bg: 241 244 248;
+    --color-surface: 255 255 255;
+    --color-ink: 16 21 28;
+    --color-ink-text: 241 244 248;
+    --color-border: 214 220 227;
+    --color-border-hover: 194 202 211;
+    --color-ice: 14 124 144;
+    --color-ice-dim: 207 243 248;
+    --color-amber: 181 114 14;
+    --color-text: 16 21 28;
+    --color-text-muted: 75 85 99;
+    --color-text-faint: 112 122 137;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+  html.light {
+    color-scheme: light;
+  }
+
+  /* Lenis owns smooth scrolling; native smooth would fight it. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  body {
+    @apply bg-bg font-body text-text antialiased;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+  }
+
+  ::selection {
+    @apply bg-ice/30 text-text;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--color-ice));
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.2em] text-ice;
+  }
+  .line-mask {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+  }
+  .word-mask {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    padding-bottom: 0.1em;
+    margin-bottom: -0.1em;
+  }
+  /* Art-directed layers: per-breakpoint placement comes from CSS vars set by HeroLayer. */
+  .layer {
+    position: absolute;
+    left: var(--d-x);
+    top: var(--d-y);
+    width: var(--d-w);
+    transform: rotate(var(--d-r));
+    display: var(--d-v);
+  }
+  @media (max-width: 1023px) {
+    .layer {
+      left: var(--t-x);
+      top: var(--t-y);
+      width: var(--t-w);
+      transform: rotate(var(--t-r));
+      display: var(--t-v);
+    }
+  }
+  @media (max-width: 639px) {
+    .layer {
+      left: var(--m-x);
+      top: var(--m-y);
+      width: var(--m-w);
+      transform: rotate(var(--m-r));
+      display: var(--m-v);
+    }
+  }
+  .grid-texture {
+    background-image:
+      linear-gradient(to right, rgb(var(--color-ice) / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--color-ice) / 0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+}
+
+/* Reduced motion: content must always be visible and static. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal],
+  [data-clip],
+  [data-layer] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+}

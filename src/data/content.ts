@@ -1,55 +1,27 @@
-// Central content source for the site. Components read from here rather than
-// hardcoding copy, so updates happen in one place.
+// Single content source. Scraped from the live site (jacob-mkhwanazi.netlify.app)
+// via Firecrawl; components never hardcode copy.
+
+export const profile = {
+  name: 'Jacob Mkhwanazi',
+  role: 'ServiceNow Engineer / Full-Stack Developer',
+  location: 'Johannesburg, South Africa',
+  headline: ['I make enterprise', 'systems talk to', 'each other.'],
+  summary:
+    'ITSM and LMS integration engineer building automated workflows and full-stack tooling across ServiceNow, HaloITSM, Cherwell, and Litmos — with a full-stack development practice on the side.',
+  email: 'jacobesselmkhwanazi@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/jacobesselmkhwanazi/',
+  github: 'https://github.com/DestroyerOfCode12',
+  site: 'https://jacob-mkhwanazi.netlify.app',
+}
 
 export interface ExperienceEntry {
   id: string
   company: string
   role: string
   period: string
-  /** ISO date (YYYY-MM-DD) this role started — used to compute total years of experience. */
   startDate: string
   current: boolean
   highlights: string[]
-}
-
-export interface ProjectEntry {
-  id: string
-  name: string
-  description: string
-  stack: string[]
-  status: 'live' | 'in-progress' | 'complete'
-  context?: string
-  url?: string
-  liveUrl?: string
-  /** Marks the single project shown in the larger spotlight block above the grid. */
-  featured?: boolean
-}
-
-export interface SkillGroup {
-  id: string
-  label: string
-  skills: string[]
-}
-
-export interface Profile {
-  name: string
-  role: string
-  location: string
-  summary: string
-  email: string
-  linkedin: string
-  github: string
-}
-
-export const profile: Profile = {
-  name: 'Jacob Mkhwanazi',
-  role: 'ServiceNow Engineer / Full-Stack Developer',
-  location: 'Johannesburg, South Africa',
-  summary:
-    'ITSM and LMS integration engineer building automated workflows and full-stack tooling across ServiceNow, HaloITSM, Cherwell, and Litmos — with a full-stack development practice on the side.',
-  email: 'jacobesselmkhwanazi@gmail.com',
-  linkedin: 'https://www.linkedin.com/in/jacobesselmkhwanazi/',
-  github: 'https://github.com/DestroyerOfCode12',
 }
 
 export const experience: ExperienceEntry[] = [
@@ -82,7 +54,37 @@ export const experience: ExperienceEntry[] = [
   },
 ]
 
-export const projects: ProjectEntry[] = [
+export function getYearsOfExperience(): number {
+  const earliest = Math.min(...experience.map((e) => new Date(e.startDate).getTime()))
+  return Math.floor((Date.now() - earliest) / (1000 * 60 * 60 * 24 * 365.25))
+}
+
+export interface Project {
+  id: string
+  name: string
+  description: string
+  stack: string[]
+  status: 'live' | 'in-progress' | 'complete'
+  context?: string
+  url?: string
+  liveUrl?: string
+  featured?: boolean
+  image?: string
+}
+
+export const projects: Project[] = [
+  {
+    id: 'malika-cakes',
+    name: "Malika's Cake Boutique",
+    description:
+      'Full-stack e-commerce site for a bakery — customer-facing storefront and order management backend.',
+    stack: ['React', 'Vite', 'TypeScript', 'Tailwind', 'Zustand', 'Node.js', 'Express', 'Prisma'],
+    status: 'live',
+    url: 'https://github.com/DestroyerOfCode12/malika-cakes',
+    liveUrl: 'https://malikas-cakes.netlify.app/',
+    featured: true,
+    image: '/projects/malika-cakes.png',
+  },
   {
     id: 'payfast-litmos',
     name: 'PayFast × Litmos Enrollment Integration',
@@ -111,17 +113,6 @@ export const projects: ProjectEntry[] = [
     context: 'Adaptive',
   },
   {
-    id: 'malika-cakes',
-    name: "Malika's Cake Boutique",
-    description:
-      'Full-stack e-commerce site for a bakery — customer-facing storefront and order management backend.',
-    stack: ['React', 'Vite', 'TypeScript', 'Tailwind', 'Zustand', 'Node.js', 'Express', 'Prisma'],
-    status: 'live',
-    url: 'https://github.com/DestroyerOfCode12/malika-cakes',
-    liveUrl: 'https://malikas-cakes.netlify.app/',
-    featured: true,
-  },
-  {
     id: 'resume-engine',
     name: 'ResumeEngine',
     description:
@@ -132,22 +123,14 @@ export const projects: ProjectEntry[] = [
   },
 ]
 
-export function getYearsOfExperience(): number {
-  const earliestStart = experience.reduce<Date>((earliest, entry) => {
-    const start = new Date(entry.startDate)
-    return start < earliest ? start : earliest
-  }, new Date(experience[0].startDate))
-
-  const years = (Date.now() - earliestStart.getTime()) / (1000 * 60 * 60 * 24 * 365.25)
-  return Math.floor(years)
+export interface SkillGroup {
+  id: string
+  label: string
+  skills: string[]
 }
 
 export const skills: SkillGroup[] = [
-  {
-    id: 'itsm-lms',
-    label: 'ITSM & LMS Platforms',
-    skills: ['ServiceNow', 'HaloITSM', 'Cherwell', 'Litmos'],
-  },
+  { id: 'itsm-lms', label: 'ITSM & LMS Platforms', skills: ['ServiceNow', 'HaloITSM', 'Cherwell', 'Litmos'] },
   {
     id: 'engineering',
     label: 'Engineering Stack',
@@ -156,12 +139,22 @@ export const skills: SkillGroup[] = [
   {
     id: 'practices',
     label: 'Core Practices',
-    skills: [
-      'Workflow Automation',
-      'API Integration Architecture',
-      'CMDB',
-      'ITIL',
-      'ServiceNow CSA (in progress)',
-    ],
+    skills: ['Workflow Automation', 'API Integration Architecture', 'CMDB', 'ITIL', 'ServiceNow CSA (in progress)'],
   },
 ]
+
+export const story = {
+  eyebrow: '03 — Approach',
+  text:
+    'The work spans two registers: configuring and automating the ITSM/LMS platforms that keep organizations running, and building full-stack applications when the problem calls for custom software rather than platform configuration.',
+  note: 'Currently ITIL Foundation and Practitioner certified, working toward the ServiceNow CSA.',
+}
+
+// Draft working principles (my wording, not scraped) — edit freely.
+export const principles = [
+  { title: 'Configure before you code', body: 'Use the platform properly first. Custom software is for what configuration cannot reach.' },
+  { title: 'Integrations are products', body: 'Every connection between systems gets a clear owner, error handling and a way to be checked.' },
+  { title: 'Automate the manual step', body: 'Find the step people repeat, remove it, and keep the process readable afterwards.' },
+  { title: 'Leave it documented', body: 'Hand over workbooks and structure the next engineer can actually follow.' },
+]
+
